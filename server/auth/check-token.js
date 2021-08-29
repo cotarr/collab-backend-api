@@ -27,7 +27,7 @@
 //     iat: 1629232403,
 //     scope: [
 //       'offline_access',
-//       'auth.read',
+//       'auth.token',
 //       'api.read'
 //     ],
 //     ..... other data ....
