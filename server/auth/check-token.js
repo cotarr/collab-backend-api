@@ -86,15 +86,22 @@ exports.checkToken = (token, callback) => {
   if ((cachedData)) {
     callback(null, cachedData);
   } else {
+    const clientAuth = Buffer.from(config.oauth2.clientId + ':' +
+      config.oauth2.clientSecret).toString('base64');
+    const body = {
+      access_token: token
+    };
     const fetchOptions = {
-      method: 'GET',
+      method: 'POST',
       timeout: 5000,
       headers: {
+        'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: 'Bearer ' + token
-      }
+        Authorization: 'Basic ' + clientAuth
+      },
+      body: JSON.stringify(body)
     };
-    const authServerUrl = config.oauth2.authURL + '/introspect';
+    const authServerUrl = config.oauth2.authURL + '/oauth/introspect';
     fetch(authServerUrl, fetchOptions)
       .then((response) => {
         if (response.ok) {

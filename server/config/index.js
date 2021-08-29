@@ -27,8 +27,8 @@ exports.server = {
 };
 
 exports.oauth2 = {
-  // clientId: process.env.OAUTH2_CLIENT_ID || 'abc123',
-  // clientSecret: process.env.OAUTH2_CLIENT_SECRET || 'ssh-secret',
+  clientId: process.env.OAUTH2_CLIENT_ID || 'abc123',
+  clientSecret: process.env.OAUTH2_CLIENT_SECRET || 'ssh-secret',
   authHost: process.env.OAUTH2_AUTH_HOST || '127.0.0.1:3500',
   authURL: process.env.OAUTH2_AUTH_URL || 'http://127.0.0.1:3500',
   // To disable token cache set tokenCacheSeconds = 0
