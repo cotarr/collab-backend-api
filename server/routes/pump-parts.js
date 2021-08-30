@@ -6,6 +6,7 @@
 
 const express = require('express');
 const router = express.Router();
+const { requireScopeForApiRoute } = require('../auth/authorization');
 
 const dummyData = {
   id: 227,
@@ -27,14 +28,14 @@ const queryNotFound = (req, res) => {
 };
 
 // Get all records as array
-router.get('/',
+router.get('/', requireScopeForApiRoute(['api.read', 'api.write']),
   (req, res, next) => {
     // this is array of all records (1 for now)
     res.json([dummyData]);
   }
 );
 // Get one record by ID
-router.get('/227',
+router.get('/227', requireScopeForApiRoute(['api.read', 'api.write']),
   (req, res, next) => {
     res.json(dummyData);
   }
@@ -44,7 +45,7 @@ router.get('/227',
 router.get('/*', queryNotFound);
 
 // Other REST methods not supported
-router.post('/*', methodNotAllowed);
+router.post('/*', requireScopeForApiRoute('api.write'), methodNotAllowed);
 router.put('/*', methodNotAllowed);
 router.patch('/*', methodNotAllowed);
 router.delete('/*', methodNotAllowed);

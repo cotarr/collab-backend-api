@@ -13,7 +13,8 @@ exports.site = {
   // Example: "mailto:security@example.com",
   securityContact: process.env.SITE_SECURITY_CONTACT || '',
   // Example: "Fri, 1 Apr 2022 08:00:00 -0600"
-  securityExpires: process.env.SITE_SECURITY_EXPIRES || ''
+  securityExpires: process.env.SITE_SECURITY_EXPIRES || '',
+  ownHost: process.env.SITE_OWN_HOST || 'localhost:4000'
 };
 
 exports.server = {

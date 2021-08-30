@@ -41,6 +41,7 @@ The `.env` file is supported.
 SITE_VHOST=*
 SITE_SECURITY_CONTACT=security@example.com
 SITE_SECURITY_EXPIRES="Fri, 1 Apr 2022 08:00:00 -0600"
+SITE_OWN_HOST=localhost:4000
 
 SERVER_TLS_KEY=./server/certs/privatekey.pem
 SERVER_TLS_CERT=./server/certs/certificate.pem
