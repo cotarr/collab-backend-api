@@ -22,7 +22,7 @@ passport.use(new BearerStrategy(
     // add req object to callback function: callback (req, token, done)
     passReqToCallback: true,
     // For WWW-Authentication response header
-    realm: 'user@' + config.oauth2.authHost
+    realm: 'user@' + config.site.ownHost
   },
   (req, accessToken, done) => {
     authorization.lookupToken(accessToken)
