@@ -4,6 +4,7 @@ This is a demo repository.
 It is a mock REST API using passport and passport-http-bearer to
 restrict API access using OAuth2 bearer tokens. Access decision is
 performed by sending the tokens to the oauth2 provider for validation.
+Route authorization is restricted based on token scope.
 
 This is one of 3 repositories.
 
