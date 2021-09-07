@@ -33,6 +33,6 @@ exports.oauth2 = {
   authHost: process.env.OAUTH2_AUTH_HOST || '127.0.0.1:3500',
   authURL: process.env.OAUTH2_AUTH_URL || 'http://127.0.0.1:3500',
   // To disable token cache set tokenCacheSeconds = 0
-  tokenCacheSeconds: process.env.OAUTH2_CACHE_SEC || 60,
-  tokenCacheCleanSeconds: process.env.OAUTH_CACHE_CLEAN_SEC || 300
+  tokenCacheSeconds: process.env.OAUTH2_TOKEN_CACHE_SEC || 60,
+  tokenCacheCleanSeconds: process.env.OAUTH_TOKEN_CACHE_CLEAN_SEC || 300
 };

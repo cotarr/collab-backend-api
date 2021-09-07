@@ -51,11 +51,28 @@ SERVER_PID_FILENAME=
 
 OAUTH2_AUTH_HOST=127.0.0.1:3500
 OAUTH2_AUTH_URL=http://127.0.0.1:3500
-OAUTH2_CACHE_SEC=900
-OAUTH2_CACHE_CLEAN_SEC=3600
+OAUTH2_TOKEN_CACHE_SEC=60
+OAUTH2_TOKEN_CACHE_CLEAN_SEC=300
 ```
 
 To start the program
 ```bash
 npm start
+```
+### API Implementation example:  /v1/data/pumpdata/23432
+
+Middleware to process oauth2 access_token using passport strategy in app.js
+
+```js
+app.use('/v1', passport.authenticate('bearer', { session: false }), routes);
+```
+
+Middleware to process oauth2 access token scope restrictions in each route handler.
+
+```js
+router.get('/32432', requireScopeForApiRoute(['api.read', 'api.write']),
+  (req, res, next) => {
+    res.json(dummyData);
+  }
+);
 ```

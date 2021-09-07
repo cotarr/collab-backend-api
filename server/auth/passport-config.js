@@ -25,10 +25,12 @@ passport.use(new BearerStrategy(
     realm: 'user@' + config.site.ownHost
   },
   (req, accessToken, done) => {
-    authorization.lookupToken(accessToken)
-      .then((token) => authorization.checkTokenActive(token))
-      .then((token) => authorization.addTokenScopeToPassportReq(req, token))
-      .then((token) => done(null, token.client))
+    authorization.findCachedToken(accessToken)
+      .then((introspect) => authorization.validateToken(accessToken, introspect))
+      .then((introspect) => authorization.checkTokenActive(introspect))
+      .then((introspect) => authorization.saveTokenToCache(accessToken, introspect))
+      .then((introspect) => authorization.addTokenScopeToPassportReq(req, introspect))
+      .then((introspect) => done(null, introspect.client))
       .catch(() => done(null, false));
   }
 ));
