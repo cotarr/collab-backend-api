@@ -16,7 +16,7 @@ Note: redirect must be different from auth_host
 - client_id      (abc123)
 - client_secret  (ssh-secret)
 - client_base64  (YWJjMTIzOnNzaC1zZWNyZXQ=)
-- scope          (offline_access api.read)
+- scope          (api.read)
 
 ## Getting a token from auth server
 
@@ -27,7 +27,7 @@ Note: redirect must be different from auth_host
  - Access Token URL: {{auth_host}}/oauth/token
  - Client Id: {{client_id}}
  - Client Secret: {{client_secret}}
- - Scope: offline_access api.read
+ - Scope: api.read
 - Press: Get New Access Token
 - When prompted enter username and password
 - When window opens, select: Use Token
