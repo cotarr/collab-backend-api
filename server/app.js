@@ -70,7 +70,7 @@ if (nodeEnv === 'development') {
 app.get('/status', (req, res) => res.json({ status: 'ok' }));
 
 // Route for security.txt
-app.use(securityContact);
+app.get('/.well-known/security.txt', securityContact);
 
 // From this point, reject all requests not maching vhost domain name
 app.use(checkVhost.rejectNotVhost);
