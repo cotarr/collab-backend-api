@@ -189,8 +189,7 @@ exports.requireScopeForApiRoute = (requiredScope) => {
   return (req, res, next) => {
     let scopeFound = false;
     if ((req.locals) && (req.locals.tokenScope) &&
-      (Array.isArray(req.locals.tokenScope) &&
-      (req.locals.tokenScope.length > 0))) {
+      (Array.isArray(req.locals.tokenScope))) {
       requiredScope.forEach((scopeString) => {
         if (req.locals.tokenScope.indexOf(scopeString) >= 0) scopeFound = true;
       });
