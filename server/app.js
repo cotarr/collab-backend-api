@@ -30,7 +30,6 @@ const routes = require('./routes/index');
 // Custom Modules
 const checkVhost = require('./middlewares/check-vhost');
 const securityContact = require('./utils/security-contact');
-const debugUtils = require('./utils/debug-utils');
 
 // Configuration
 const config = require('./config');
@@ -59,11 +58,6 @@ app.use(passport.initialize());
 // Register http-bearer stratecy with passport
 require('./auth/passport-config');
 
-// Debug utilities
-if (nodeEnv === 'development') {
-  app.use(debugUtils);
-}
-
 //
 //   /status    Is the server alive?
 //
@@ -90,7 +84,7 @@ app.use('/v1', passport.authenticate('bearer', { session: false }), routes);
 // ---------------------------------
 //       T E S T   E R R O R
 // ---------------------------------
-app.use('/error', (req, res, next) => { throw new Error('Test error'); });
+// app.get('/error', (req, res, next) => { throw new Error('Test error'); });
 
 // ---------------------------------
 //    E R R O R   H A N D L E R S

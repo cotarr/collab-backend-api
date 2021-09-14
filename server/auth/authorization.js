@@ -173,10 +173,46 @@ exports.addTokenScopeToPassportReq = (req, introspect) => {
   return introspect;
 };
 
+/**
+ * Extract user ID number from validated token metadata and save to req object
+ *
+ * @param   {Object} introspect - Validated token metadata (=false if not cached)
+ * @returns {Object} Passes through introspect metadata unmodified
+ */
+exports.addUserIdNumberToPassportReq = (req, introspect) => {
+  if (!req.locals) req.locals = {};
+  req.locals.userid = parseInt(introspect.user.number) || 0;
+  return introspect;
+};
+
 // ----------------------------------------------
 // Part 3 - Passport Token Scope Extraction
 // ----------------------------------------------
 
+/**
+ * Middleware function restrict access based on list of allowed scopes
+ * Insufficient scope will reject as 403 forbidden
+ *
+ * Example:
+ *
+ * In app.js, the passport stratecy will
+ *   1) validate token
+ *   2) add scope to request object
+ *
+ *     app.use('/v1',
+ *       passport.authenticate('bearer', { session: false }),
+ *       routes);
+ *
+ * In route handler, scope is checked by this middleware
+ *
+ *     router.get('/',
+ *       requireScopeForApiRoute(['api.read', 'api.write', 'api.admin']),
+ *       validations.list,
+ *       controller.list);
+ *
+ * @param   {Array or String} requiredScope Array of stings or a single string
+ * @returns {Function} return next() or else return HTTP error 403
+ */
 exports.requireScopeForApiRoute = (requiredScope) => {
   if ((requiredScope == null) ||
     ((typeof requiredScope !== 'string') &&
@@ -208,4 +244,57 @@ exports.requireScopeForApiRoute = (requiredScope) => {
       throw new Error('Error, Scope not found in request object');
     }
   };
+};
+
+/**
+ * Function to match scope in token based on list of allowed scopes
+ * Sufficient scope returns true, else insufficent scope returns false
+ * The Boolean value can be used in data validation for permission specific params
+ *
+ * Example:
+ *
+ * In app.js, the passport stratecy will
+ *   1) validate token
+ *   2) add scope to request object
+ *
+ *     app.use('/v1',
+ *       passport.authenticate('bearer', { session: false }),
+ *       routes);
+ *
+ * In express-validator, scope is matched by this function
+ *
+ *     body('userid').optional()
+ *       .custom(function (value, { req }) {
+ *       // if not admin, then body userid must match JWT token userid
+ *       if ((!matchScope(req, 'health.admin')) &&
+ *       (parseInt(value) !== parseInt(req.locals.userid))) {
+ *       throw new Error('Token userid not match body userid');
+ *     }
+ *     return true;
+ *   }),
+ *
+ * @param   {Array or String} requiredScope Array of strings or a single string
+ * @returns {Boolean} return true if scope in list, otherwise return false
+ */
+
+exports.matchScope = (req, requiredScope) => {
+  if ((requiredScope == null) ||
+    ((typeof requiredScope !== 'string') &&
+    (!Array.isArray(requiredScope)))) {
+    throw new Error('matchScope requires string or array');
+  }
+  if (typeof requiredScope === 'string') {
+    requiredScope = [requiredScope];
+  }
+  let scopeFound = false;
+  if ((req.locals) && (req.locals.tokenScope) &&
+    (Array.isArray(req.locals.tokenScope))) {
+    requiredScope.forEach((scopeString) => {
+      if (req.locals.tokenScope.indexOf(scopeString) >= 0) scopeFound = true;
+    });
+  } else {
+    throw new Error('Error, Scope not found in request object');
+  }
+  // return result as boolean
+  return scopeFound;
 };
