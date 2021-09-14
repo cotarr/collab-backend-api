@@ -4,6 +4,7 @@
   "description": "This is one of 3 repositories used to try oauth2 and passport",
   "main": "bin/www",
   "scripts": {
+    "lint": "npx eslint server bin/www",
     "start": "node bin/www"
   },
   "repository": {
