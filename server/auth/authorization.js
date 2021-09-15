@@ -181,7 +181,9 @@ exports.addTokenScopeToPassportReq = (req, introspect) => {
  */
 exports.addUserIdNumberToPassportReq = (req, introspect) => {
   if (!req.locals) req.locals = {};
-  req.locals.userid = parseInt(introspect.user.number) || 0;
+  if ((introspect != null) && (introspect.user) && (introspect.user.number)) {
+    req.locals.userid = parseInt(introspect.user.number) || 0;
+  }
   return introspect;
 };
 
