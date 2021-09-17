@@ -6,11 +6,14 @@ restrict API access using OAuth2 bearer tokens. Access decision is
 performed by sending the tokens to the oauth2 provider for validation.
 Route authorization is restricted based on token scope.
 
-This is one of 3 repositories.
+This is one of 4 repositories
 
-- collab-auth (Oauth2 Authorization Provider, redirect login, tokens)
-- collab-frontend (Web server, reverse proxy, html content)
-- collab-backend-api (Mock REST API using tokens to authorize requests)
+|                        Repository                                  |                   Description                         |
+| ------------------------------------------------------------------ | ----------------------------------------------------- |
+| collab-auth                                                        | Oauth2 Authorization Provider, redirect login, tokens |
+| [collab-frontend](https://github.com/cotarr/collab-frontend)       | Mock Web server, reverse proxy, HTML content          |
+| [collab-backend-api](https://github.com/cotarr/collab-backend-api) | Mock REST API using tokens to authorize requests      |
+| [collab-iot-device](https://github.com/cotarr/collab-iot-device)   | Mock IOT Device with data acquisition saved to DB     |
 
 
 ### Mock data routes
