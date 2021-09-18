@@ -10,13 +10,11 @@ const router = express.Router();
 //
 // Route handlers
 //
-const pumpData = require('./pump-data');
-const pumpParts = require('./pump-parts');
+const iotData = require('./iot-data');
 
 //
 // Routes
 //
-router.use('/data/pumpdata', pumpData);
-router.use('/data/pumpparts', pumpParts);
+router.use('/data/iot-data', iotData);
 
 module.exports = router;

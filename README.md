@@ -18,14 +18,22 @@ This is one of 4 repositories
 
 ### Mock data routes
 ```
-/v1/data/pumpdata/23432
-/v1/data/pumpparts/227
+GET /v1/data/iot-data/     (List all mock records, maximum is 10)
+POST /v1/data/iot-data/    (Save mock record with following schema)
+
+  example data = {
+    "deviceId": "iot-device-12",
+    "timestamp": "2021-09-17T15:33:07.743Z",
+    "data1": 25.486,
+    "data2": 25.946,
+    "data3": 24.609
+  }  
 ```
 
 ### Status Routes
 ```
-/status (No authentication)
-/secure (requires access-token)
+GET /status (No authentication)
+GET /secure (requires access-token)
 ```
 
 ### Install
@@ -39,7 +47,7 @@ npm install
 ```
 ### Example Environment variables (showing defaults)
 
-The `.env` file is supported.
+The `.env` file is supported using dotenv npm package
 
 ```
 SITE_VHOST=*
@@ -53,6 +61,8 @@ SERVER_TLS=false
 SERVER_PORT=4000
 SERVER_PID_FILENAME=
 
+OAUTH2_CLIENT_ID=abc123
+OAUTH2_CLIENT_SECRET=ssh-secret
 OAUTH2_AUTH_HOST=127.0.0.1:3500
 OAUTH2_AUTH_URL=http://127.0.0.1:3500
 OAUTH2_TOKEN_CACHE_SEC=60
@@ -68,15 +78,44 @@ npm start
 Middleware to process oauth2 access_token using passport strategy in app.js
 
 ```js
+// ---------------------------
+// Routes for mock REST API
+// ---------------------------
 app.use('/v1', passport.authenticate('bearer', { session: false }), routes);
+```
+
+Router Middleware to direct request to proper route handler
+
+```js
+const express = require('express');
+const router = express.Router();
+const iotData = require('./iot-data');
+
+router.use('/data/iot-data', iotData);
 ```
 
 Middleware to process oauth2 access token scope restrictions in each route handler.
 
 ```js
-router.get('/32432', requireScopeForApiRoute(['api.read', 'api.write']),
-  (req, res, next) => {
-    res.json(dummyData);
-  }
-);
+const express = require('express');
+const router = express.Router();
+const { requireScopeForApiRoute } = require('../auth/authorization');
+const controller = require('../controllers/iot-data');
+const validations = require('../validations/iot-data');
+
+// ------------------
+// list All Records
+// ------------------
+router.get('/',
+  requireScopeForApiRoute(['api.read', 'api.write']),
+  validations.list,
+  controller.list);
+
+// --------------------
+//  create new record
+// --------------------
+router.post('/',
+  requireScopeForApiRoute(['api.write']),
+  validations.create,
+  controller.create);
 ```
