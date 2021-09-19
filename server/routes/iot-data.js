@@ -30,7 +30,9 @@ router.post('/',
 // ------------------------
 // Replace a record by id
 // ------------------------
-router.put('/*', methodNotAllowed);
+router.put('/*',
+  requireScopeForApiRoute(['debug.no-scope-will-match']),
+  methodNotAllowed);
 
 // ------------------------
 // Modify a record by id

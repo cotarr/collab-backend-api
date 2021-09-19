@@ -36,7 +36,7 @@ exports.create = function (req, res, next) {
   //
   // save to memory variable Array to emulate database
   //
-  if (dataArray.length > 10) {
+  if (dataArray.length >= 10) {
     // This is demo, limit array to 10 records
     dataArray.splice(0, 1);
   }

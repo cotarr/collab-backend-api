@@ -89,6 +89,10 @@ timestamped data points from the mock IOT device should be available in the arra
 ]
 ```
 
+### Using Postman to exercise the API.
+
+See: [postman/README.md](postman/README.md)
+
 ### Status Routes
 
 The mock API can be monitored using the following status routes.
