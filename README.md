@@ -1,6 +1,6 @@
 # collab-backend-api
 
-This is 1 of 4 repositories used on a collaboration project for learning oauth2orize and passport.
+This is 3 of 4 repositories used on a collaboration project for learning oauth2orize and passport.
 This repository is a mock REST API using passport with strategy passport-http-bearer.
 One table has be setup to use POST and GET requests to temporarily store or retrieve mock data in RAM variables.
 API access is restricted using OAuth2 bearer tokens. Access decision is
