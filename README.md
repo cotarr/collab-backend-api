@@ -1,12 +1,11 @@
 # collab-backend-api
 
-This is a demo repository.
-It is a mock REST API using passport and passport-http-bearer to
-restrict API access using OAuth2 bearer tokens. Access decision is
-performed by sending the tokens to the oauth2 provider for validation.
+This is 1 of 4 repositories used on a collaboration project for learning oauth2orize and passport.
+This repository is a mock REST API using passport with strategy passport-http-bearer.
+One table has be setup to use POST and GET requests to temporarily store or retrieve mock data in RAM variables.
+API access is restricted using OAuth2 bearer tokens. Access decision is
+performed by sending the tokens to the oauth2 server for validation.
 Route authorization is restricted based on token scope.
-
-This is one of 4 repositories
 
 |                        Repository                                  |                   Description                         |
 | ------------------------------------------------------------------ | ----------------------------------------------------- |
@@ -16,25 +15,6 @@ This is one of 4 repositories
 | [collab-iot-device](https://github.com/cotarr/collab-iot-device)   | Mock IOT Device with data acquisition saved to DB     |
 
 
-### Mock data routes
-```
-GET /v1/data/iot-data/     (List all mock records, maximum is 10)
-POST /v1/data/iot-data/    (Save mock record with following schema)
-
-  example data = {
-    "deviceId": "iot-device-12",
-    "timestamp": "2021-09-17T15:33:07.743Z",
-    "data1": 25.486,
-    "data2": 25.946,
-    "data3": 24.609
-  }  
-```
-
-### Status Routes
-```
-GET /status (No authentication)
-GET /secure (requires access-token)
-```
 
 ### Install
 
@@ -45,6 +25,79 @@ cd collab-backend-api
 npm install
 
 ```
+
+### To start the program
+
+In the development environment with NODE_ENV=development or NODE_ENV not specified,
+the application should run as-is. No configuration is necessary in development mode.
+Alternately, environment variables can be configured as listed at the end of this README,
+In the default configuration the server will listen on port 4000 at http://localhost:4000.
+
+```bash
+npm start
+```
+
+### Mock data routes
+```
+GET /v1/data/iot-data/     (List all mock records, maximum is 10)
+POST /v1/data/iot-data/    (Save mock record with following schema)
+```
+
+To submit data to the iot-data table in the database, the HTTP request should
+use the POST method to the "/v1/data/iot-data". An "Authorization" header be added to the HTTP request
+containing "Bearer xxxxxxxx" where xxxxxxx should be a string containing the access token.
+The data to be submitted should be encoded in JSON format and included
+in the body of the POST request as follows:
+
+```
+{
+  "deviceId": "iot-device-12",
+  "timestamp": "2021-09-17T15:33:07.743Z",
+  "data1": 25.486,
+  "data2": 25.946,
+  "data3": 24.609
+}  
+```
+
+A successful request should return status 201 (Created). If the access token is missing,
+expired, or otherwise invalid, the API return 401 Unauthorized. If the request does not
+have sufficient scope to access the database table, the API will return 403 Forbidden.
+In this case scope "api.write" is needed.
+
+To retrieve data from the iot-data table in the database, the HTTP request should
+use the GET method. An "Authorization" header be added to the HTTP request
+containing "Bearer xxxxxxxx" where xxxxxxx should be a string containing the access token.
+The access token should have possible scope of "api.read" or "api.write", either scope will be accepted.
+The mock API will append a record id using UUID.v4 format.
+A createdAt and updatedAt timestamp will also be appended to the record.
+The API will return an array of objects in JSON format.
+The array is limited to a maximum of 10 elements, and the most recent 10
+timestamped data points from the mock IOT device should be available in the array.
+
+```
+[
+  {
+    "id": 1277,
+    "deviceId": "iot-device-12",
+    "timestamp": "2021-09-17T15:32:08.417Z",
+    "data1": 24.831,
+    "data2": 27.241,
+    "data3": 22.307
+    "updatedAt": "2021-09-17T15:33:07.797Z",
+    "createdAt": "2021-09-17T15:33:07.797Z"
+  }
+]
+```
+
+### Status Routes
+
+The mock API can be monitored using the following status routes.
+
+```
+GET /status (No authentication)
+GET /secure (requires access-token)
+```
+
 ### Example Environment variables (showing defaults)
 
 The `.env` file is supported using dotenv npm package
