@@ -23,7 +23,7 @@ exports.server = {
   serverTlsCert: process.env.SERVER_TLS_CERT ||
     path.join(__dirname, './server/certs/certificate.pem'),
   tls: (process.env.SERVER_TLS === 'true') || false,
-  port: process.env.SERVER_PORT || 4000,
+  port: parseInt(process.env.SERVER_PORT || '4000'),
   pidFilename: process.env.SERVER_PID_FILENAME || ''
 };
 
@@ -33,6 +33,6 @@ exports.oauth2 = {
   authHost: process.env.OAUTH2_AUTH_HOST || '127.0.0.1:3500',
   authURL: process.env.OAUTH2_AUTH_URL || 'http://127.0.0.1:3500',
   // To disable token cache set tokenCacheSeconds = 0
-  tokenCacheSeconds: parseInt(process.env.OAUTH2_TOKEN_CACHE_SEC) || 60,
-  tokenCacheCleanSeconds: parseInt(process.env.OAUTH_TOKEN_CACHE_CLEAN_SEC) || 300
+  tokenCacheSeconds: parseInt(process.env.OAUTH2_TOKEN_CACHE_SEC || '60'),
+  tokenCacheCleanSeconds: parseInt(process.env.OAUTH_TOKEN_CACHE_CLEAN_SEC || '300')
 };
