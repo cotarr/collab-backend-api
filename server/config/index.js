@@ -6,8 +6,6 @@ require('dotenv').config();
 
 // const nodeEnv = process.env.NODE_ENV || 'development';
 
-exports.nodeDebugLog = process.env.NODE_DEBUG_LOG || 0;
-
 exports.site = {
   vhost: process.env.SITE_VHOST || '*',
   // Example: "mailto:security@example.com",
