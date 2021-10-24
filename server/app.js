@@ -18,7 +18,6 @@ const http = require('http');
 
 // express packages
 const express = require('express');
-const bodyParser = require('body-parser');
 const logger = require('morgan');
 const compression = require('compression');
 const passport = require('passport');
