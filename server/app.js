@@ -43,8 +43,8 @@ if (nodeEnv === 'production') {
   }
 }
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 if (nodeEnv === 'production') {
   app.use(compression());
