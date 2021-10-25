@@ -14,7 +14,7 @@ The development version listed below can be imported directly into postman from 
 - backend_host   (http://localhost:4000)
 - redirect       (http://localhost:3000/login/callback)
 - user_username  (bob)
-- user_password  (secret)
+- user_password  (bobssecret)
 - client_id      (abc123)
 - client_secret  (ssh-secret)
 - client_base64  (YWJjMTIzOnNzaC1zZWNyZXQ=)

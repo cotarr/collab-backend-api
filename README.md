@@ -9,7 +9,7 @@ Route authorization is restricted based on token scope.
 
 |                        Repository                                  |                   Description                         |
 | ------------------------------------------------------------------ | ----------------------------------------------------- |
-| collab-auth                                                        | Oauth2 Authorization Provider, redirect login, tokens |
+| [collab-auth](https://github.com/cotarr/collab-auth)               | Oauth2 Authorization Provider, redirect login, tokens |
 | [collab-frontend](https://github.com/cotarr/collab-frontend)       | Mock Web server, reverse proxy, HTML content          |
 | [collab-backend-api](https://github.com/cotarr/collab-backend-api) | Mock REST API using tokens to authorize requests      |
 | [collab-iot-device](https://github.com/cotarr/collab-iot-device)   | Mock IOT Device with data acquisition saved to DB     |
@@ -126,10 +126,6 @@ OAUTH2_TOKEN_CACHE_SEC=60
 OAUTH2_TOKEN_CACHE_CLEAN_SEC=300
 ```
 
-To start the program
-```bash
-npm start
-```
 ### API Implementation example:  /v1/data/pumpdata/23432
 
 Middleware to process oauth2 access_token using passport strategy in app.js
