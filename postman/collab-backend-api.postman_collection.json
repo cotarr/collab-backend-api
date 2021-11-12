@@ -332,13 +332,18 @@
 		"type": "oauth2",
 		"oauth2": [
 			{
-				"key": "scope",
-				"value": "api.read api.write",
+				"key": "grant_type",
+				"value": "client_credentials",
 				"type": "string"
 			},
 			{
 				"key": "redirect_uri",
-				"value": "{{redirect_uri}}",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "scope",
+				"value": "api.read api.write",
 				"type": "string"
 			},
 			{

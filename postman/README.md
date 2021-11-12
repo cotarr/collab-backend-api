@@ -45,22 +45,21 @@ The authorization method should have been preset after importing the collection.
 
 - Select Collection, then select collection Authorization tab
 - The following arguments are populated from local variables
- - Grant Type: Authorization Code
- - Callback URL: {{redirect_uri}}
- - Authorize using browser NOT checked.
- - Auth URL: {{auth_host}}/dialog/authorize
+ - Type: Oauth 2.0
+ - Add auth to: Request Headers
+ - Header Prefix: Bearer
+ - Grant Type: Client Credentials
  - Access Token URL: {{auth_host}}/oauth/token
  - Client Id: {{client_id}}
  - Client Secret: {{client_secret}}
  - Scope: api.read api.write
- - State:
  - Client Authentication: Send as basic auth header
 
 To get a token
 
 - Select Collection, then select collection Authorization tab
 - Press: Get New Access Token
-- When prompted enter username (bob) and password (bobssecret)
+- Authorization Complete: Press continue
 - When window opens, select: Use Token
 - The postman test can now inherit this token from parent collection.
 
