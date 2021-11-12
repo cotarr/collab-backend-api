@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "collab-backend-api",
-		"description": "See collab-backend-api/postman/README.md",
+		"description": "See collab-backend-api/postman/README.md\n\nIt is necessary for the collab-backend-api collection to obtain an access token before running the tests. The collection token will be inherited by the individual tests.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [

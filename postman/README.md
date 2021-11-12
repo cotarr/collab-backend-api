@@ -5,14 +5,14 @@
 
 ## Local variables
 
-Note: redirect must be different from auth_host
+Note: auth_host URL must be a different hostname from other URL for cookies to operate properly
 
-The development version listed below can be imported directly into postman from "collab-auth Backend.postman_environment.json"
+The development version listed below can be imported directly into postman from "collab-backend-api.postman_environment.json"
 
 - auth_host      (http://127.0.0.1:3500)
   frontend_host  (http://localhost:3000)
 - backend_host   (http://localhost:4000)
-- redirect       (http://localhost:3000/login/callback)
+- redirect_uri   (http://localhost:3000/login/callback)
 - user_username  (bob)
 - user_password  (bobssecret)
 - client_id      (abc123)
@@ -32,7 +32,7 @@ The development version listed below can be imported directly into postman from 
  - Client Secret: {{client_secret}}
  - Scope: api.read
 - Press: Get New Access Token
-- When prompted enter username and password
+- When prompted enter username (bob) and password (bobssecret)
 - When window opens, select: Use Token
 - The postman test can now inherit this token from parent collection.
 
