@@ -12,7 +12,7 @@ have scope "api.write".
 
 ## Import postman collections
 
-- Import "postman/collab-backend-api.postman_collection" collection from repository
+- Import "postman/collab-backend-api.postman_collection.json" collection from repository
 - Import "postman/"collab-backend-api.postman_environment.json" enviornment from repository
 
 ## Local variables
@@ -30,6 +30,14 @@ The development version listed below can be imported directly into postman from 
 - client_id      (abc123)
 - client_secret  (ssh-secret)
 - client_base64  (YWJjMTIzOnNzaC1zZWNyZXQ=)
+
+## Required Servers
+
+The following servers must be running in the development environment
+for these test.
+
+- collab-auth - authorization server
+- collab-backend-api - mock API server
 
 ## Getting an access_token from auth server
 
