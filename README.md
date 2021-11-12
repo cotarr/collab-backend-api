@@ -1,11 +1,15 @@
 # collab-backend-api
 
 This is 3 of 4 repositories used on a collaboration project for learning oauth2orize and passport.
-This repository is a mock REST API using passport with strategy passport-http-bearer.
-One table has be setup to use POST and GET requests to temporarily store or retrieve mock data in RAM variables.
-API access is restricted using OAuth2 bearer tokens. Access decision is
-performed by sending the tokens to the oauth2 server for validation.
-Route authorization is restricted based on token scope.
+The collab-backend-api repository is a mock REST API using passport with
+strategy passport-http-bearer.
+The mock database includes one table to accept POST and GET requests.
+In memory RAM variables are used to emulate database storage.
+API access is restricted using OAuth2 bearer tokens.
+Token validation is performed by sending the tokens to the authorization
+server for remote validation.
+Individual route authorization may be further restricted based on token scope values that are
+associated with the access_token.
 
 |                        Repository                                  |                   Description                         |
 | ------------------------------------------------------------------ | ----------------------------------------------------- |
@@ -14,7 +18,9 @@ Route authorization is restricted based on token scope.
 | [collab-backend-api](https://github.com/cotarr/collab-backend-api) | Mock REST API using tokens to authorize requests      |
 | [collab-iot-device](https://github.com/cotarr/collab-iot-device)   | Mock IOT Device with data acquisition saved to DB     |
 
+### Documentation:
 
+https://cotarr.github.io/collab-auth
 
 ### Install
 
@@ -102,7 +108,7 @@ GET /status (No authentication)
 GET /secure (requires access-token)
 ```
 
-### Example Environment variables (showing defaults)
+### Example Environment variables
 
 The `.env` file is supported using dotenv npm package
 
