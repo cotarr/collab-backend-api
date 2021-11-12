@@ -33,6 +33,8 @@ The development version listed below can be imported directly into postman from 
 
 ## Getting an access_token from auth server
 
+The authorization method should have been preset after importing the collection.
+
 - Select Collection, then select collection Authorization tab
 - The following arguments are populated from local variables
  - Grant Type: Authorization Code
@@ -42,7 +44,13 @@ The development version listed below can be imported directly into postman from 
  - Access Token URL: {{auth_host}}/oauth/token
  - Client Id: {{client_id}}
  - Client Secret: {{client_secret}}
- - Scope: api.read
+ - Scope: api.read api.write
+ - State:
+ - Client Authentication: Send as basic auth header
+
+To get a token
+
+- Select Collection, then select collection Authorization tab
 - Press: Get New Access Token
 - When prompted enter username (bob) and password (bobssecret)
 - When window opens, select: Use Token
