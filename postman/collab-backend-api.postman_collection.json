@@ -326,6 +326,216 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "/api/v1/data/manual-data/id Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"435bf533-7280-4dce-a9d0-2960b43019f9\",\n    \"weather\": \"Partly Cloudy\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_host}}/v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9",
+					"host": [
+						"{{backend_host}}"
+					],
+					"path": [
+						"v1",
+						"data",
+						"manual-data",
+						"435bf533-7280-4dce-a9d0-2960b43019f9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/data/manual-data/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.weather).to.equal('Partly Cloudy');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{backend_host}}/v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9",
+					"host": [
+						"{{backend_host}}"
+					],
+					"path": [
+						"v1",
+						"data",
+						"manual-data",
+						"435bf533-7280-4dce-a9d0-2960b43019f9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/data/manual-data/id Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"435bf533-7280-4dce-a9d0-2960b43019f9\",\n    \"weather\": \"Raining\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_host}}/v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9",
+					"host": [
+						"{{backend_host}}"
+					],
+					"path": [
+						"v1",
+						"data",
+						"manual-data",
+						"435bf533-7280-4dce-a9d0-2960b43019f9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/data/manual-data/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.weather).to.equal('Raining');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{backend_host}}/v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9",
+					"host": [
+						"{{backend_host}}"
+					],
+					"path": [
+						"v1",
+						"data",
+						"manual-data",
+						"435bf533-7280-4dce-a9d0-2960b43019f9"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
