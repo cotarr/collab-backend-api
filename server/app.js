@@ -42,8 +42,9 @@ if (nodeEnv === 'production') {
   }
 }
 
+// Only JSON submission data id decoded.
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.urlencoded());
 
 if (nodeEnv === 'production') {
   app.use(compression());
