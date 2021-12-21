@@ -95,7 +95,7 @@ exports.findById = [
 /**
  * Modify an existing record
  *
- * Method = PATCH, Data in body
+ * Method = POST, Data in body (route append /update/)
  *
  * Schema =
  *  {
@@ -106,6 +106,52 @@ exports.findById = [
  *  }
  */
 exports.update = [
+  //
+  // Validate Forbidden keys
+  //
+  body([
+    'createdAt',
+    'updatedAt'], 'server generated values not allowed')
+    .not().exists(),
+  //
+  // Validate Required keys
+  //
+  param('id', 'Required value')
+    .exists(),
+  body('id', 'Required values')
+    .exists(),
+  //
+  // Validate Input
+  //
+  param('id', 'Invalid UUID.v4')
+    .isUUID(4),
+  body('id', 'Invalid UUID.v4')
+    .isUUID(4),
+  body(['weather'], 'Invalid string length')
+    .isLength({ min: 1, max: 30 }),
+  body('weather', 'Invalid characters in string')
+    .isWhitelisted(allowedChars),
+
+  //
+  // On error return status 422 Unprocessable Entity
+  //
+  handleValidationError
+]; // update
+
+/**
+ * Modify an existing record
+ *
+ * Method = PATCH, Data in body
+ *
+ * Schema =
+ *  {
+ *    id: '435bf533-7280-4dce-a9d0-2960b43019f9',
+ *    weather: 'Partly Cloudy',
+ *    createdAt: '2021-12-18T20:26:25.989Z',
+ *    updatedAt: '2021-12-18T20:26:25.989Z'
+ *  }
+ */
+exports.patch = [
   //
   // Validate Forbidden keys
   //
@@ -135,4 +181,4 @@ exports.update = [
   // On error return status 422 Unprocessable Entity
   //
   handleValidationError
-]; // create
+]; // patch

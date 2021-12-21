@@ -34,12 +34,20 @@ router.get('/:id',
 // --------------------
 router.post('/', methodNotAllowed);
 
-// ------------------------
-// Modify a record by ID
-// ------------------------
-router.patch('/:id',
+// -------------------------------------------
+// Modify a record by ID using /update route
+// -------------------------------------------
+router.post('/update/:id',
   requireScopeForApiRoute(['api.write']),
   validations.update,
+  controller.update);
+
+// ------------------------------------
+//  modify a record using PATCH method
+// ------------------------------------
+router.patch('/:id',
+  requireScopeForApiRoute(['api.write']),
+  validations.patch,
   controller.update);
 
 // --------------------
