@@ -42,9 +42,11 @@ if (nodeEnv === 'production') {
   }
 }
 
-// Only JSON submission data id decoded.
+// body parser for accepting JSON
 app.use(express.json());
-// app.use(express.urlencoded());
+// Submission data from <form> elements can be disabled by removing
+// the urlencoded bodyparser (x-www-form-urlencoded not parsed).
+app.use(express.urlencoded({ extended: false }));
 
 if (nodeEnv === 'production') {
   app.use(compression());
