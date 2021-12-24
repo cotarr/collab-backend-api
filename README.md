@@ -132,18 +132,16 @@ OAUTH2_TOKEN_CACHE_SEC=60
 OAUTH2_TOKEN_CACHE_CLEAN_SEC=300
 ```
 
-### API Implementation example:  /v1/data/pumpdata/23432
+### API Implementation example:  /v1/data/iot-data
 
-Middleware to process oauth2 access_token using passport strategy in app.js
+Middleware to process oauth2 access_token using passport strategy in `app.js`
 
 ```js
-// ---------------------------
-// Routes for mock REST API
-// ---------------------------
+const routes = require('./routes/index');
 app.use('/v1', passport.authenticate('bearer', { session: false }), routes);
 ```
 
-Router Middleware to direct request to proper route handler
+Router Middleware load route handler in `routes/index.js`
 
 ```js
 const express = require('express');
@@ -153,7 +151,7 @@ const iotData = require('./iot-data');
 router.use('/data/iot-data', iotData);
 ```
 
-Middleware to process oauth2 access token scope restrictions in each route handler.
+Middleware to process oauth2 access token scope restrictions in `routes/iot-data.js`
 
 ```js
 const express = require('express');
@@ -177,4 +175,39 @@ router.post('/',
   requireScopeForApiRoute(['api.write']),
   validations.create,
   controller.create);
+```
+
+### Other routes
+
+The collab-frontend includes a second web page at /suggestions.html
+that is used to provide an example of some suggested security enhancements.
+The example requires a mock database table with one record that can be
+read or modified. These routes are not related to the oauth part of the
+demonstration. They are only included to support the unrelated security examples.
+
+The mock database table includes only 1 record with a fixed id value.
+In order to compare modification of a database record using both the
+browser JavaScript fetch API or alternately using a simple html `<form>` submission,
+two equivalent routes were created.
+The JavaScript example use method PATCH.
+The form example uses method POST with "/update/" appended to the route path.
+The two routes are otherwise equivalent.
+No other methods are supported on this mock API route.
+
+Schema:
+
+```
+{
+    "id": "435bf533-7280-4dce-a9d0-2960b43019f9",
+    "weather": "Foggy"
+}
+```
+
+Routes
+
+```
+GET /v1/data/manual-data/
+GET /v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9
+PATCH /v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9
+POST /v1/data/manual-data/update/435bf533-7280-4dce-a9d0-2960b43019f9
 ```
