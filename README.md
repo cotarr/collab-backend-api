@@ -132,6 +132,15 @@ OAUTH2_TOKEN_CACHE_SEC=60
 OAUTH2_TOKEN_CACHE_CLEAN_SEC=300
 ```
 
+Not supported in .env file
+
+```
+# When NODE_ENV=production, console activity log disabled.
+NODE_ENV=development
+# When NODE_DEBUG_LOG=1, console activity log enabled when in production
+NODE_DEBUG_LOG=0
+```
+
 ### API Implementation example:  /v1/data/iot-data
 
 Middleware to process oauth2 access_token using passport strategy in `app.js`
