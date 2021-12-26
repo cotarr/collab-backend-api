@@ -8,7 +8,7 @@ and this project adheres to
 
 ## [v0.0.1](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.1) - 2021-12-26
 
-## Changed
+### Changed
 
 - Set tag v0.0.1
 - Changed github repository visibility to public
