@@ -55,7 +55,7 @@ containing "Bearer xxxxxxxx" where xxxxxxx should be a string containing the acc
 The data to be submitted should be encoded in JSON format and included
 in the body of the POST request as follows:
 
-```
+```json
 {
   "deviceId": "iot-device-12",
   "timestamp": "2021-09-17T15:33:07.743Z",
@@ -80,7 +80,7 @@ The API will return an array of objects in JSON format.
 The array is limited to a maximum of 10 elements, and the most recent 10
 timestamped data points from the mock IOT device should be available in the array.
 
-```
+```json
 [
   {
     "id": 1277,
@@ -205,7 +205,7 @@ No other methods are supported on this mock API route.
 
 Schema:
 
-```
+```json
 {
     "id": "435bf533-7280-4dce-a9d0-2960b43019f9",
     "weather": "Foggy"
