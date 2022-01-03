@@ -3,7 +3,8 @@
 const express = require('express');
 const router = express.Router();
 
-const { requireScopeForApiRoute } = require('../auth/authorization');
+const { requireScopeForApiRoute } = require('@cotarr/collab-backend-token-auth');
+
 const controller = require('../controllers/iot-data');
 const validations = require('../validations/iot-data');
 

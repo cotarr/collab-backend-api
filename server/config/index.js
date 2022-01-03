@@ -31,5 +31,5 @@ exports.oauth2 = {
   authURL: process.env.OAUTH2_AUTH_URL || 'http://127.0.0.1:3500',
   // To disable token cache set tokenCacheSeconds = 0
   tokenCacheSeconds: parseInt(process.env.OAUTH2_TOKEN_CACHE_SEC || '60'),
-  tokenCacheCleanSeconds: parseInt(process.env.OAUTH_TOKEN_CACHE_CLEAN_SEC || '300')
+  tokenCacheCleanSeconds: parseInt(process.env.OAUTH2_TOKEN_CACHE_CLEAN_SEC || '300')
 };

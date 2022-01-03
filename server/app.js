@@ -20,8 +20,9 @@ const http = require('http');
 const express = require('express');
 const logger = require('morgan');
 const compression = require('compression');
-const passport = require('passport');
 const app = express();
+
+const { authInit, requireAccessToken } = require('@cotarr/collab-backend-token-auth');
 
 // Routes
 const routes = require('./routes/index');
@@ -55,10 +56,16 @@ if (nodeEnv === 'production') {
 // HTTP access log
 app.use(logger(logConfig.format, logConfig.options));
 
-// Initialize passport (note: this does not require express-session)
-app.use(passport.initialize());
-// Register http-bearer stratecy with passport
-require('./auth/passport-config');
+//
+// Initialize the authorization middleware
+//
+authInit({
+  authURL: config.oauth2.authURL,
+  clientId: config.oauth2.clientId,
+  clientSecret: config.oauth2.clientSecret,
+  tokenCacheSeconds: config.oauth2.tokenCacheSeconds,
+  tokenCacheCleanSeconds: config.oauth2.tokenCacheCleanSeconds
+});
 
 //
 //   /status    Is the server alive?
@@ -75,13 +82,14 @@ app.use(checkVhost.rejectNotVhost);
 //   /secure   Secure route for confirming credentials remotely
 //
 app.get('/secure',
-  passport.authenticate('bearer', { session: false }), (req, res) => res.json({ secure: 'ok' })
+  requireAccessToken(),
+  (req, res) => res.json({ secure: 'ok' })
 );
 
 // ---------------------------
 // Routes for mock REST API
 // ---------------------------
-app.use('/v1', passport.authenticate('bearer', { session: false }), routes);
+app.use('/v1', requireAccessToken(), routes);
 
 // ---------------------------------
 //       T E S T   E R R O R

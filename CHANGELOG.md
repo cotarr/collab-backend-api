@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Untagged - 2022-01-03
+
+### Added
+
+- Added authorization middleware @cotarr/collab-backend-token-auth
+
+[collab-backend-token-auth](https://github.com/cotarr/collab-backend-token-auth)
+is a custom npm module that was written specific to be used with this 
+this mock API (collab-backend-api). 
+It includes middleware to provide access restrictions using a
+collab-auth generated Oauth 2.0 access token. It also allows route specific
+scope restrictions. In terms of the collab-backend-api functionality,
+it should be functionally equivalent to the previous version using passport-http-bearer.
+
+### Removed
+
+- Removed npm dependency passport-http-bearer middleware.
+- Deleted server/auth/authorization.js
+- Deleted server/auth/passport-config.js
+
 ## [v0.0.1](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.1) - 2021-12-26
 
 ### Changed

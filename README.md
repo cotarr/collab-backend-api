@@ -1,8 +1,10 @@
 # collab-backend-api
 
-This is 3 of 4 repositories used on a collaboration project for learning oauth2orize and passport.
-The collab-backend-api repository is a mock REST API using passport with
-strategy passport-http-bearer.
+This is 3 of 4 repositories used on a collaboration project for learning oauth2orize.
+The collab-backend-api repository uses an authorization middleware 
+[collab-backend-token-auth](https://github.com/cotarr/collab-backend-token-auth)
+that was written specifically to work with this repository (collab-backend-api)
+It is available as a node module @cotarr/collab-backend-token-auth.
 The mock database includes one table to accept POST and GET requests.
 In memory RAM variables are used to emulate database storage.
 API access is restricted using OAuth2 bearer tokens.
@@ -143,11 +145,21 @@ NODE_DEBUG_LOG=0
 
 ### API Implementation example:  /v1/data/iot-data
 
-Middleware to process oauth2 access_token using passport strategy in `app.js`
+Middleware to process oauth2 access_token using `@cotarr/collab-backend-token-auth`
 
 ```js
+const { authInit, requireAccessToken } = require('@cotarr/collab-backend-token-auth');
+
+// Initialize authorization middleware on program load.
+authInit({
+  authURL: config.oauth2.authURL,
+  clientId: config.oauth2.clientId,
+  clientSecret: config.oauth2.clientSecret
+});
+
 const routes = require('./routes/index');
-app.use('/v1', passport.authenticate('bearer', { session: false }), routes);
+// Route /v1 require authorization using access token.
+app.use('/v1', requireAccessToken(), routes);
 ```
 
 Router Middleware load route handler in `routes/index.js`
@@ -165,7 +177,7 @@ Middleware to process oauth2 access token scope restrictions in `routes/iot-data
 ```js
 const express = require('express');
 const router = express.Router();
-const { requireScopeForApiRoute } = require('../auth/authorization');
+const { requireScopeForApiRoute } = require('@cotarr/collab-backend-token-auth');
 const controller = require('../controllers/iot-data');
 const validations = require('../validations/iot-data');
 
