@@ -47,7 +47,7 @@ const handleValidationError = (req, res, next) => {
 };
 
 /**
- * List All Records
+ * Input Validation for list request
  */
 exports.list = [
   // Forbidden query parameters
@@ -63,20 +63,19 @@ exports.list = [
 ];
 
 /**
- * Create new record
- *
- * Method = POST, Data in body
- *
- * Schema =
- *   {
- *     deviceId: 'iot-device-12',
- *     timestamp: '2021-09-17T15:33:07.743Z',
- *     data1: 25.486,
- *     data2: 25.946,
- *     data3: 24.609
- *   }
+ * Input Validation for create request
  */
 exports.create = [
+  // Method = POST, Data in body
+  // Schema =
+  //   {
+  //     deviceId: 'iot-device-12',
+  //     timestamp: '2021-09-17T15:33:07.743Z',
+  //     data1: 25.486,
+  //     data2: 25.946,
+  //     data3: 24.609
+  //   }
+
   //
   // Validate Forbidden keys
   //

@@ -50,7 +50,7 @@ const allowedChars =
   'abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 
 /**
- * List All Records
+ * Input Validation for list request
  */
 exports.list = [
   // Forbidden query parameters
@@ -64,7 +64,7 @@ exports.list = [
 ];
 
 /**
- * Find Records by ID
+ * Input validation for Find by ID request
  */
 exports.findById = [
   //
@@ -93,19 +93,18 @@ exports.findById = [
 ]; // findById
 
 /**
- * Modify an existing record
- *
- * Method = POST, Data in body (route append /update/)
- *
- * Schema =
- *  {
- *    id: '435bf533-7280-4dce-a9d0-2960b43019f9',
- *    weather: 'Partly Cloudy',
- *    createdAt: '2021-12-18T20:26:25.989Z',
- *    updatedAt: '2021-12-18T20:26:25.989Z'
- *  }
+ * Input validation for update requests
  */
 exports.update = [
+  // Method = POST, Data in body (route append /update/)
+  // Schema =
+  //  {
+  //    id: '435bf533-7280-4dce-a9d0-2960b43019f9',
+  //    weather: 'Partly Cloudy',
+  //    createdAt: '2021-12-18T20:26:25.989Z',
+  //    updatedAt: '2021-12-18T20:26:25.989Z'
+  //  }
+
   //
   // Validate Forbidden keys
   //
@@ -139,19 +138,18 @@ exports.update = [
 ]; // update
 
 /**
- * Modify an existing record
- *
- * Method = PATCH, Data in body
- *
- * Schema =
- *  {
- *    id: '435bf533-7280-4dce-a9d0-2960b43019f9',
- *    weather: 'Partly Cloudy',
- *    createdAt: '2021-12-18T20:26:25.989Z',
- *    updatedAt: '2021-12-18T20:26:25.989Z'
- *  }
+ * Input Validation for patch requests
  */
 exports.patch = [
+  // Method = PATCH, Data in body
+  // Schema =
+  //  {
+  //    id: '435bf533-7280-4dce-a9d0-2960b43019f9',
+  //    weather: 'Partly Cloudy',
+  //    createdAt: '2021-12-18T20:26:25.989Z',
+  //    updatedAt: '2021-12-18T20:26:25.989Z'
+  //  }
+
   //
   // Validate Forbidden keys
   //

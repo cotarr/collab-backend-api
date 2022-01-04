@@ -7,6 +7,9 @@ const { requireScopeForApiRoute } = require('@cotarr/collab-backend-token-auth')
 const controller = require('../controllers/manual-data');
 const validations = require('../validations/manual-data');
 
+/**
+ * Middleware to generate status 405 error.
+ */
 const methodNotAllowed = (req, res, next) => {
   res.status(405).json({ code: 405, message: 'Method Not Allowed' });
 };

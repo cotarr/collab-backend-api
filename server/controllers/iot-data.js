@@ -1,24 +1,26 @@
 'use strict';
 
-// --------------------
-//  create new record
-// --------------------
+// -----------------------------
+//  Mock database for IOT Data
+// -----------------------------
 
+/** @type {number} id - Primary index */
 let id = 0;
+
+/** @type {Array} dataArray - Mock database */
 const dataArray = [];
 
 /**
- * List Controller (return all records)
- *
- * A query filter is not supported in demo
- * List controller simply returns the entire array
+ * Controller to return all records
  */
 exports.list = function (req, res, next) {
+  // A query filter is not supported in demo
+  // List controller simply returns the entire array
   res.json(dataArray);
 };
 
 /**
- * List Controller (Creates a new record)
+ * Controller to create a new record
  */
 exports.create = function (req, res, next) {
   const now = new Date().toISOString();
