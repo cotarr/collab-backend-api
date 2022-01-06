@@ -1,17 +1,12 @@
 # collab-backend-api
 
 This is 3 of 4 repositories used on a collaboration project for learning oauth2orize.
-The collab-backend-api repository uses an authorization middleware 
-[collab-backend-token-auth](https://github.com/cotarr/collab-backend-token-auth)
-that was written specifically to work with this repository (collab-backend-api)
-It is available as a node module @cotarr/collab-backend-token-auth.
+The collab-backend-api repository is a mock REST API used to demonstrate use of Oauth 2.0 access tokens to restrict access.
 The mock database includes one table to accept POST and GET requests.
 In memory RAM variables are used to emulate database storage.
-API access is restricted using OAuth2 bearer tokens.
-Token validation is performed by sending the tokens to the authorization
-server for remote validation.
-Individual route authorization may be further restricted based on token scope values that are
-associated with the access_token.
+API access is restricted using OAuth 2.0 bearer tokens.
+Token validation is performed by sending the tokens to the collab-auth authorization server for remote validation.
+Individual route authorization may be further restricted based on token scope values that are associated with the access_token.
 
 |                        Repository                                  |                   Description                         |
 | ------------------------------------------------------------------ | ----------------------------------------------------- |
@@ -19,6 +14,16 @@ associated with the access_token.
 | [collab-frontend](https://github.com/cotarr/collab-frontend)       | Mock Web server, reverse proxy, HTML content          |
 | [collab-backend-api](https://github.com/cotarr/collab-backend-api) | Mock REST API using tokens to authorize requests      |
 | [collab-iot-device](https://github.com/cotarr/collab-iot-device)   | Mock IOT Device with data acquisition saved to DB     |
+
+
+The module [collab-backend-token-auth](https://github.com/cotarr/collab-backend-token-auth)
+was developed specifically to work with this repository (collab-backend-api).
+It is available as an npm package 
+[@cotarr/collab-backend-token-auth](https://www.npmjs.com/package/@cotarr/collab-backend-token-auth).
+It includes middleware that will parse the http authorization header for a bearer token and extract a JWT access token.
+The npm module will submit the access token token to the authorization server /oauth/introspect endpoint 
+for validation of the digital signature. User related meta-data is returned for use by this API. 
+Unauthorized requests will generate a status 401 Unauthorized response. 
 
 ### Documentation:
 

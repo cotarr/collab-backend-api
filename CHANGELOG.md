@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Untagged - 2022-01-06
+
+### Changed
+
+* README.md (2022-01-06)
+
 ## [v0.0.3](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.3) - 2022-01-04
 
 ### Changed
