@@ -11,6 +11,7 @@ and this project adheres to
 ### Changed
 
 * README.md (2022-01-06)
+* package.json - Update dependency version (2022-01-06)
 
 ## [v0.0.3](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.3) - 2022-01-04
 
