@@ -6,10 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Untagged - 2022-01-06
+## [v0.0.4](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.4) - 2022-01-22
 
 ### Changed
 
+* Update node-fetch v2.6.7 to address github advisory (2022-01-22)
+* Update collab-backend-token-auth to v1.0.2
 * README.md (2022-01-06)
 * package.json - Update dependency version (2022-01-06)
 
