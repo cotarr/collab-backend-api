@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## next - 2022-07-12
+
+### Changed
+
+- package.json - Update express 4.17.3 to 4.18.1, express-validator 6.14.0 to 6.14.2, 
+- package.json - Update dotenv 16.0.0 to 16.0.1, @cotarr/collab-backend-token-auth 1.0.4 to 1.0.5
 ## [v0.0.6](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.6) - 2022-03-30
 
 ### Changed
