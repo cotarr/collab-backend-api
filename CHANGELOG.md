@@ -1,3 +1,14 @@
+# Branch notes
+
+- This is an independent branch created to experiment with cors policies.
+- This branch will not be merged with the main branch (see README.md)
+
+### Branch changes:
+
+- server/config/index.js - Add new environment variable to specify the hostname of the collab-frontend server.
+- package.json - Added npm package `cors`, requires running `npm install`
+- app.js - Added custom routes with cors implementation
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
