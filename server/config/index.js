@@ -13,7 +13,9 @@ exports.site = {
   securityContact: process.env.SITE_SECURITY_CONTACT || '',
   // Example: "Fri, 1 Apr 2022 08:00:00 -0600"
   securityExpires: process.env.SITE_SECURITY_EXPIRES || '',
-  ownHost: process.env.SITE_OWN_HOST || 'localhost:4000'
+  ownHost: process.env.SITE_OWN_HOST || 'localhost:4000',
+  // To support demo of CORS by allowing frontend page to access demo API
+  frontendCorsHost: process.env.SITE_FRONTEND_CORS_HOST || 'http://localhost:3000'
 };
 
 exports.server = {

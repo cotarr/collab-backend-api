@@ -67,6 +67,60 @@ authInit({
   tokenCacheCleanSeconds: config.oauth2.tokenCacheCleanSeconds
 });
 
+// --------- CORS demo section ---------------
+// This is for CORS demo /cors-demo.html
+// Instruction load with the page.
+//
+// Note: the routes for the CORS test do not require authentication
+//
+const cors = require('cors');
+
+// The CORS access-control-allow-origin header is sent
+// to the browser in the API response for the purpose
+// of showing the server's CORS header in the demo.
+const sendCorsDemoResponse = (req, res, next) => {
+  const resObject = {
+    reqMethod: req.method,
+    reqPath: req._parsedUrl.path
+  };
+  const headers = res.getHeaders();
+  if ('access-control-allow-origin' in headers) {
+    resObject.resCorsHeader = 'access-control-allow-origin: ' +
+      headers['access-control-allow-origin'];
+  } else {
+    resObject.comment = 'No CORS headers found in response object';
+  }
+  res.json(resObject);
+};
+
+// -----------------------------------------
+// This route will respond to request from
+// any server without authorization
+// -----------------------------------------
+app.options('/corsFromAny', cors());
+app.get('/corsFromAny', cors(), sendCorsDemoResponse);
+app.delete('/corsFromAny', cors(), sendCorsDemoResponse);
+
+// ----------------------------------------------
+// Dynamic list of hosts. CORS header appended
+// when requesting web site URL is in the list
+// ----------------------------------------------
+const allowList = [config.site.frontendCorsHost];
+const corsOptions = {
+  origin: function (origin, callback) {
+    // console.log('callback origin:', origin);
+    if (allowList.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+app.options('/corsFromOne', cors(corsOptions));
+app.get('/corsFromOne', cors(corsOptions), sendCorsDemoResponse);
+app.delete('/corsFromOne', cors(corsOptions), sendCorsDemoResponse);
+// ---- End of CORS demo section -----
+
 //
 //   /status    Is the server alive?
 //
