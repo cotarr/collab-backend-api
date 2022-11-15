@@ -11,6 +11,7 @@ and this project adheres to
 ### Chanaged
 
 - package-lock.json - Bumped minimatach v3.0.4 to v3.1.2, npm audit fix to address github dependabot alert.
+- package.json - Bumped @cotarr/collab-backend-token-auth v1.0.6 which contains minimatch version upgrade
 
 ## [v0.0.7](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.7 - 2022-07-12
 
