@@ -16,6 +16,11 @@ no longer required.
 
 - Deleted package-lock.json. Ran npm install to create a new package-lock.json.
 
+Other:
+
+- updated package.lock to current versions.
+- Updated .eslintrc.js due to upgraded eslint version.
+
 ## [v0.0.9](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.9) - 2023-01-11
 
 To fix npm audit warning:
