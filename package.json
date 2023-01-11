@@ -1,6 +1,6 @@
 {
   "name": "collab-backend-api",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Mock REST API used on a collaboration project for learning oauth2orize and passport",
   "main": "bin/www",
   "scripts": {
@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/cotarr/collab-backend-api#readme",
   "dependencies": {
-    "@cotarr/collab-backend-token-auth": "^1.0.6",
+    "@cotarr/collab-backend-token-auth": "^1.0.7",
     "compression": "^1.7.4",
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "express-validator": "^6.14.2",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.7"

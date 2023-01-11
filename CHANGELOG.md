@@ -6,21 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v0.0.9](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.9 - 2023-01-11
+## [v0.0.10](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.10) - 2023-01-11
+
+### Changed
+
+The npm security advisory for debug package has been updated to 
+to incorporate backport debug@2.6.9 as safe. Manual edit of package-lock.json is 
+no longer required.
+
+- Deleted package-lock.json. Ran npm install to create a new package-lock.json.
+
+## [v0.0.9](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.9) - 2023-01-11
 
 To fix npm audit warning:
 
 - Deleted package-lock.json, re-installed eslint and dependencies.
 - package-lock.json - Manually upgrade all instances of debug<=3.1.0 to debug@4.3.4
 
-## [v0.0.8](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.8 - 2022-11-15
+## [v0.0.8](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.8) - 2022-11-15
 
 ### Chanaged
 
 - package-lock.json - Bumped minimatach v3.0.4 to v3.1.2, npm audit fix to address github dependabot alert.
 - package.json - Bumped @cotarr/collab-backend-token-auth v1.0.6 which contains minimatch version upgrade
 
-## [v0.0.7](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.7 - 2022-07-12
+## [v0.0.7](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.7) - 2022-07-12
 
 ### Changed
 
