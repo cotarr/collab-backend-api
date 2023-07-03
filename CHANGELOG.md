@@ -11,6 +11,7 @@ and this project adheres to
 - Removed node-fetch dependency, was not used.
 - To match changes in collab-frontend, remove controllers/manual-data.js, routes/manual-data.js, validations/manual-data.js (not needed).
 - Remove Postman tests related to manual-data routes (route removed from API).
+- Update README.md to reflect removal of manual-data routes.
 - Upgrade express-validator@7.0.1 with edits to fix breaking changes in v7.
 - Add Postman tests to challenge data validation
 - Edited error handler in app.js

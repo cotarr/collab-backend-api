@@ -202,38 +202,3 @@ router.post('/',
   validations.create,
   controller.create);
 ```
-
-### Other routes
-
-The collab-frontend includes a second web page at /suggestions.html
-that is used to provide an example of some suggested security enhancements.
-The example requires a mock database table with one record that can be
-read or modified. These routes are not related to the oauth part of the
-demonstration. They are only included to support the unrelated security examples.
-
-The mock database table includes only 1 record with a fixed id value.
-In order to compare modification of a database record using both the
-browser JavaScript fetch API or alternately using a simple html `<form>` submission,
-two equivalent routes were created.
-The JavaScript example use method PATCH.
-The form example uses method POST with "/update/" appended to the route path.
-The two routes are otherwise equivalent.
-No other methods are supported on this mock API route.
-
-Schema:
-
-```json
-{
-    "id": "435bf533-7280-4dce-a9d0-2960b43019f9",
-    "weather": "Foggy"
-}
-```
-
-Routes
-
-```
-GET /v1/data/manual-data/
-GET /v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9
-PATCH /v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9
-POST /v1/data/manual-data/update/435bf533-7280-4dce-a9d0-2960b43019f9
-```
