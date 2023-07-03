@@ -114,14 +114,14 @@ app.use(function (err, req, res, next) {
   // per Node docs, if response in progress, must be returned to default error handler
   if (res.headersSent) return next(err);
   const status = err.status || 500;
-  let message = http.STATUS_CODES[status] || 'Unknown Error Occurred';
-  if ((err.message) && (message !== err.message)) message += ', ' + err.message;
-  message = 'Status: ' + status.toString() + ', ' + message;
+  let message = status.toString() + ' ' + (http.STATUS_CODES[status] || 'Error');
+  if (err.message) message += ', ' + (err.message.split('\n')[0]);
   if (nodeEnv === 'production') {
     console.log(message);
     return res.set('Content-Type', 'text/plain').status(status).send(message);
   } else {
-    console.log(err);
+    console.log(message);
+    // console.log(err);
     return res.set('Content-Type', 'text/plain').status(status).send(message + '\n' + err.stack);
   }
 });

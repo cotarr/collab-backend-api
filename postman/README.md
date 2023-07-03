@@ -68,10 +68,3 @@ To get a token
 After obtaining a valid access_token as shown above, the tests can be run
 individually or as Run Collection.
 
-# Other routes (/v1/data/manual-data)
-
-Some additoinal tests were added to the postman collection to use
-the `/v1/data/manual-data/` route.
-These are used in the frontend web server for some optional 
-examples that are used to demonstrate some suggested security practices. 
-These routes are not related to the demonstration of oauth 2.0.

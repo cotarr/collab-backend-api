@@ -8,6 +8,12 @@ and this project adheres to
 
 ## v0.0.11-dev 2023-07-02
 
+- Removed node-fetch dependency, was not used.
+- To match changes in collab-frontend, remove controllers/manual-data.js, routes/manual-data.js, validations/manual-data.js (not needed).
+- Remove Postman tests related to manual-data routes (route removed from API).
+- Upgrade express-validator@7.0.1 with edits to fix breaking changes in v7.
+- Add Postman tests to challenge data validation
+- Edited error handler in app.js
 - Resolved npm audit warning, install eslint@8.44.0, delete and regenerate package-lock.json in v3 format, manually install semver@7.5.3, run audit fix.
 
 ## [v0.0.10](https://github.com/cotarr/collab-backend-api/releases/tag/v0.0.10) - 2023-01-11

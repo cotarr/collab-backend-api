@@ -4,47 +4,9 @@
 
 'use strict';
 
-const { body, query, validationResult } = require('express-validator');
-
-/**
- * Middleware error handler (web Interface)
- */
-const handleValidationError = (req, res, next) => {
-  const allErrors = [];
-
-  // First, errors from express-validator
-  const validatorErrors = validationResult(req).array();
-  for (const err of validatorErrors) {
-    //
-    // This is an authorization server, so the value
-    // property is deleted to prevent logging or returning credentials
-    delete err.value;
-    allErrors.push(err);
-  }
-  // Second add custom errors from req.locals.errors
-  if (!req.locals) req.locals = {};
-  if (!req.locals.errors) req.locals.errors = [];
-  const customErrors = req.locals.errors;
-
-  for (const err of customErrors) {
-    allErrors.push(err);
-  }
-  //
-  // For now, errors are handled as an API would be.
-  // This means web user will see the error.
-  // TODO handle errors with user friendly web page
-  //
-  // return the error
-  if (allErrors.length > 0) {
-    return res.status(422).json({
-      status: 422,
-      message: 'Unprocessable Entity',
-      errors: allErrors
-    });
-  } else {
-    next();
-  }
-};
+const handleValidationError = require('./validation-error').handleError;
+const checkExtraneousKeys = require('./validation-error').checkExtraneousKeys;
+const { body, query } = require('express-validator');
 
 /**
  * Input Validation for list request
@@ -57,8 +19,9 @@ exports.list = [
     'timestamp',
     'data1',
     'data2',
-    'data3'], 'Query parameters not supported in mock API')
-    .not().exists(),
+    'data3'])
+    .not().exists()
+    .withMessage('Query parameters not supported in mock API'),
   handleValidationError
 ];
 
@@ -77,13 +40,28 @@ exports.create = [
   //   }
 
   //
+  // validate extraneous keys
+  //
+  function (req, res, next) {
+    checkExtraneousKeys(req, [
+      'deviceId',
+      'timestamp',
+      'data1',
+      'data2',
+      'data3'
+    ], ['body', 'noquery']);
+    next();
+  },
+
+  //
   // Validate Forbidden keys
   //
   body([
     'id',
     'createdAt',
-    'updatedAt'], 'server generated values not allowed')
-    .not().exists(),
+    'updatedAt'])
+    .not().exists()
+    .withMessage('server generated values not allowed'),
   //
   // Validate Required keys
   //
@@ -92,20 +70,24 @@ exports.create = [
     'timestamp',
     'data1',
     'data2',
-    'data3'], 'Required values')
-    .exists(),
+    'data3'])
+    .exists()
+    .withMessage('Required values'),
   //
   // Validate Input
   //
-  body('timestamp', 'Invalid ISO8601 date value')
-    .isISO8601(),
+  body('timestamp')
+    .isISO8601()
+    .withMessage('Invalid ISO8601 date value'),
   body([
     'data1',
     'data2',
-    'data3'], 'Invalid floating point value')
-    .isFloat(),
-  body('deviceId', 'Invalid string length')
-    .isLength({ max: 64 }),
+    'data3'])
+    .isFloat()
+    .withMessage('Invalid floating point value'),
+  body('deviceId')
+    .isLength({ max: 64 })
+    .withMessage('Invalid string length'),
   //
   // Sanitize input
   //

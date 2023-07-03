@@ -328,21 +328,23 @@
 			"response": []
 		},
 		{
-			"name": "/v1/data/manual-data/ (all)",
+			"name": "/v1/data/iot-data/ Fail extra keys",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"pm.test(\"Status code is 422\", function () {",
+							"    pm.response.to.have.status(422);",
 							"});",
-							"",
-							"pm.test(\"Your test name\", function () {",
+							"pm.test(\"Error message matches\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData[0].weather).to.equal('Partly Cloudy');",
+							"    pm.expect(jsonData.message).to.eql('Unprocessable Entity');",
 							"});",
-							""
+							"pm.test(\"Error description matches\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.errors[0].msg).to.eql('Invalid param');",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -350,27 +352,42 @@
 			],
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
-					"accept": true
+					"accept": true,
+					"content-type": true
 				}
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Accept",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n   \"deviceId\": \"iot-device-12\",\n   \"timestamp\": \"2021-09-17T15:33:07.743Z\",\n   \"data1\": 25.486,\n   \"data2\": 25.946,\n   \"data3\": 24.609,\n   \"extraKey\": 1.234\n }\n ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{backend_host}}/v1/data/manual-data/",
+					"raw": "{{backend_host}}/v1/data/iot-data/",
 					"host": [
 						"{{backend_host}}"
 					],
 					"path": [
 						"v1",
 						"data",
-						"manual-data",
+						"iot-data",
 						""
 					]
 				}
@@ -378,76 +395,23 @@
 			"response": []
 		},
 		{
-			"name": "/api/v1/data/manual-data/:id",
+			"name": "/v1/data/iot-data/ Fail type not float",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 204\", function () {",
-							"    pm.response.to.have.status(204);",
+							"pm.test(\"Status code is 422\", function () {",
+							"    pm.response.to.have.status(422);",
 							"});",
-							"",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\": \"435bf533-7280-4dce-a9d0-2960b43019f9\",\n    \"weather\": \"Partly Cloudy\"\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{backend_host}}/v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9",
-					"host": [
-						"{{backend_host}}"
-					],
-					"path": [
-						"v1",
-						"data",
-						"manual-data",
-						"435bf533-7280-4dce-a9d0-2960b43019f9"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/v1/data/manual-data/:id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Your test name\", function () {",
+							"pm.test(\"Error message matches\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.weather).to.equal('Partly Cloudy');",
+							"    pm.expect(jsonData.message).to.eql('Unprocessable Entity');",
 							"});",
-							""
+							"pm.test(\"Error description matches\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.errors[0].msg).to.eql('Invalid floating point value');",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -455,172 +419,27 @@
 			],
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
-					"accept": true
+					"accept": true,
+					"content-type": true
 				}
 			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{backend_host}}/v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9",
-					"host": [
-						"{{backend_host}}"
-					],
-					"path": [
-						"v1",
-						"data",
-						"manual-data",
-						"435bf533-7280-4dce-a9d0-2960b43019f9"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/api/v1/data/manual-data/:id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 204\", function () {",
-							"    pm.response.to.have.status(204);",
-							"});",
-							"",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\": \"435bf533-7280-4dce-a9d0-2960b43019f9\",\n    \"weather\": \"Raining\"\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{backend_host}}/v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9",
-					"host": [
-						"{{backend_host}}"
-					],
-					"path": [
-						"v1",
-						"data",
-						"manual-data",
-						"435bf533-7280-4dce-a9d0-2960b43019f9"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/v1/data/manual-data/:id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Your test name\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.weather).to.equal('Raining');",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{backend_host}}/v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9",
-					"host": [
-						"{{backend_host}}"
-					],
-					"path": [
-						"v1",
-						"data",
-						"manual-data",
-						"435bf533-7280-4dce-a9d0-2960b43019f9"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/api/v1/data/manual-data/:id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 204\", function () {",
-							"    pm.response.to.have.status(204);",
-							"});",
-							"",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
 			"request": {
 				"method": "POST",
 				"header": [
 					{
-						"key": "Content-Type",
+						"key": "Accept",
 						"value": "application/json",
 						"type": "text"
 					},
 					{
-						"key": "Accept",
+						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"435bf533-7280-4dce-a9d0-2960b43019f9\",\n    \"weather\": \"Foggy\"\n}\n",
+					"raw": " {\n   \"deviceId\": \"iot-device-12\",\n   \"timestamp\": \"2021-09-17T15:33:07.743Z\",\n   \"data1\": 25.486,\n   \"data2\": 25.946,\n   \"data3\": \"invalid string here\"\n }\n ",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -628,37 +447,38 @@
 					}
 				},
 				"url": {
-					"raw": "{{backend_host}}/v1/data/manual-data/update/435bf533-7280-4dce-a9d0-2960b43019f9",
+					"raw": "{{backend_host}}/v1/data/iot-data/",
 					"host": [
 						"{{backend_host}}"
 					],
 					"path": [
 						"v1",
 						"data",
-						"manual-data",
-						"update",
-						"435bf533-7280-4dce-a9d0-2960b43019f9"
+						"iot-data",
+						""
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "/v1/data/manual-data/:id",
+			"name": "/v1/data/iot-data/ Fail query",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"pm.test(\"Status code is 422\", function () {",
+							"    pm.response.to.have.status(422);",
 							"});",
-							"",
-							"pm.test(\"Your test name\", function () {",
+							"pm.test(\"Error message matches\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.weather).to.equal('Foggy');",
+							"    pm.expect(jsonData.message).to.eql('Unprocessable Entity');",
 							"});",
-							""
+							"pm.test(\"Error description matches\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.errors[0].msg).to.eql('Invalid param');",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -666,28 +486,48 @@
 			],
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
-					"accept": true
+					"accept": true,
+					"content-type": true
 				}
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Accept",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n   \"deviceId\": \"iot-device-12\",\n   \"timestamp\": \"2021-09-17T15:33:07.743Z\",\n   \"data1\": 25.486,\n   \"data2\": 25.946,\n   \"data3\": 24.609\n }\n ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{backend_host}}/v1/data/manual-data/435bf533-7280-4dce-a9d0-2960b43019f9",
+					"raw": "{{backend_host}}/v1/data/iot-data?deviceId=value",
 					"host": [
 						"{{backend_host}}"
 					],
 					"path": [
 						"v1",
 						"data",
-						"manual-data",
-						"435bf533-7280-4dce-a9d0-2960b43019f9"
+						"iot-data"
+					],
+					"query": [
+						{
+							"key": "deviceId",
+							"value": "value"
+						}
 					]
 				}
 			},
