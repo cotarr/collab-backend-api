@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "/status",
+			"name": "/status (success) does not require auth",
 			"event": [
 				{
 					"listen": "test",
@@ -14,6 +14,11 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql('ok');",
 							"});"
 						],
 						"type": "text/javascript"
@@ -45,7 +50,68 @@
 			"response": []
 		},
 		{
-			"name": "/v1/data/iot-data/ (no token)",
+			"name": "/v1/data/iot-data/ (Success, 404 non auth path)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n   \"deviceId\": \"iot-device-12\",\n   \"timestamp\": \"2021-09-17T15:33:07.743Z\",\n   \"data1\": 25.486,\n   \"data2\": 25.946,\n   \"data3\": 24.609\n }\n ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_host}}/not-found-path",
+					"host": [
+						"{{backend_host}}"
+					],
+					"path": [
+						"not-found-path"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/data/iot-data/ (Fail, no auth header)",
 			"event": [
 				{
 					"listen": "test",
@@ -53,6 +119,10 @@
 						"exec": [
 							"pm.test(\"Status code is 401\", function () {",
 							"    pm.response.to.have.status(401);",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"No authorization header\");",
 							"});"
 						],
 						"type": "text/javascript"
@@ -107,7 +177,212 @@
 			"response": []
 		},
 		{
-			"name": "/v1/data/iot-data/1 (insufficient scope)",
+			"name": "/v1/data/iot-data/ (Fail, no auth bad route)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"No authorization header\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n   \"deviceId\": \"iot-device-12\",\n   \"timestamp\": \"2021-09-17T15:33:07.743Z\",\n   \"data1\": 25.486,\n   \"data2\": 25.946,\n   \"data3\": 24.609\n }\n ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_host}}/v1/data/not-found-data/",
+					"host": [
+						"{{backend_host}}"
+					],
+					"path": [
+						"v1",
+						"data",
+						"not-found-data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/data/iot-data/ (Fail, missing Bearer token)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"Expected Bearer token\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n   \"deviceId\": \"iot-device-12\",\n   \"timestamp\": \"2021-09-17T15:33:07.743Z\",\n   \"data1\": 25.486,\n   \"data2\": 25.946,\n   \"data3\": 24.609\n }\n ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_host}}/v1/data/iot-data/",
+					"host": [
+						"{{backend_host}}"
+					],
+					"path": [
+						"v1",
+						"data",
+						"iot-data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/data/iot-data/ (Fail, token is garbage)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer xxxxxxxxxxxx.xxxxxxxxxxxxxxx.xxxxxxxxxxxxx",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n   \"deviceId\": \"iot-device-12\",\n   \"timestamp\": \"2021-09-17T15:33:07.743Z\",\n   \"data1\": 25.486,\n   \"data2\": 25.946,\n   \"data3\": 24.609\n }\n ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_host}}/v1/data/iot-data/",
+					"host": [
+						"{{backend_host}}"
+					],
+					"path": [
+						"v1",
+						"data",
+						"iot-data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/data/iot-data/1 (Fail, insufficient scope)",
 			"event": [
 				{
 					"listen": "test",
@@ -115,7 +390,24 @@
 						"exec": [
 							"pm.test(\"Status code is 403\", function () {",
 							"    pm.response.to.have.status(403);",
-							"});"
+							"});",
+							"",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"Token scope: Forbidden, Access token insufficient scope\");",
+							"});",
+							"",
+							"pm.test(\"Detect user forget to generate token\", function () {",
+							"    let body = pm.response.text();",
+							"    console.log(body);",
+							"    if (body === 'No authorization header') {",
+							"        console.error('It appears you did not get an access token in the collection main tab.'); ",
+							"        postman.setNextRequest(null);",
+							"        throw new Error('It appears you did not get an access token in the collection main tab.');",
+							"    }",
+							"});",
+							"",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -166,7 +458,7 @@
 			"response": []
 		},
 		{
-			"name": "/v1/data/iot-data/1 (method not allowed)",
+			"name": "/v1/data/iot-data/1 (Fail, method not allowed)",
 			"event": [
 				{
 					"listen": "test",
@@ -225,7 +517,7 @@
 			"response": []
 		},
 		{
-			"name": "/v1/data/iot-data/",
+			"name": "/v1/data/iot-data/ (success)",
 			"event": [
 				{
 					"listen": "test",
@@ -284,7 +576,7 @@
 			"response": []
 		},
 		{
-			"name": "/v1/data/iot-data/",
+			"name": "/v1/data/iot-data/ (success)",
 			"event": [
 				{
 					"listen": "test",
@@ -328,7 +620,7 @@
 			"response": []
 		},
 		{
-			"name": "/v1/data/iot-data/ Fail extra keys",
+			"name": "/v1/data/iot-data/ (Fail, extra keys)",
 			"event": [
 				{
 					"listen": "test",
@@ -395,7 +687,7 @@
 			"response": []
 		},
 		{
-			"name": "/v1/data/iot-data/ Fail type not float",
+			"name": "/v1/data/iot-data/ (Fail, type not float)",
 			"event": [
 				{
 					"listen": "test",
@@ -462,7 +754,7 @@
 			"response": []
 		},
 		{
-			"name": "/v1/data/iot-data/ Fail query",
+			"name": "/v1/data/iot-data/ (Fail, query not expected)",
 			"event": [
 				{
 					"listen": "test",

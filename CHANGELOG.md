@@ -13,7 +13,8 @@ and this project adheres to
 - Remove Postman tests related to manual-data routes (route removed from API).
 - Update README.md to reflect removal of manual-data routes.
 - Upgrade express-validator@7.0.1 with edits to fix breaking changes in v7.
-- Add Postman tests to challenge data validation
+- Add Postman tests to challenge data validation.
+- Update Postman tests for changed error messages in collab-backend-token-auth.
 - Edited error handler in app.js
 - Resolved npm audit warning, install eslint@8.44.0, delete and regenerate package-lock.json in v3 format, manually install semver@7.5.3, run audit fix.
 
