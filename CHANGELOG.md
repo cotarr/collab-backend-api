@@ -6,10 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v0.0.11-dev 2023-07-02
+## v1.0.0-dev 2023-07-02
 
+BREAKING CHANGE (since v0.0.10) require Node 18 or greater. Increment major version from 0 to 1
+
+- Set minimum version NodeJs to node 18 or greater, added node version check in config/index.js.
+- Added example .env file as "example-.env"
 - Removed node-fetch dependency, was not used.
-- To match changes in collab-frontend, remove controllers/manual-data.js, routes/manual-data.js, validations/manual-data.js (not needed).
+- Remove controllers/manual-data.js, routes/manual-data.js, validations/manual-data.js (not needed, to match collab-frontend).
 - Remove Postman tests related to manual-data routes (route removed from API).
 - Update README.md to reflect removal of manual-data routes.
 - Upgrade express-validator@7.0.1 with edits to fix breaking changes in v7.

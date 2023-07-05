@@ -114,7 +114,7 @@ app.use(function (err, req, res, next) {
   // per Node docs, if response in progress, must be returned to default error handler
   if (res.headersSent) return next(err);
   const status = err.status || 500;
-  let message = status.toString() + ' ' + (http.STATUS_CODES[status] || 'Error');
+  let message = status.toString() + ' ' + (http.STATUS_CODES[status] || 'HTTP Error');
   if (err.message) message += ', ' + (err.message.split('\n')[0]);
   if (nodeEnv === 'production') {
     console.log(message);

@@ -1,8 +1,11 @@
 {
   "name": "collab-backend-api",
-  "version": "0.0.11-dev",
+  "version": "1.0.0-dev",
   "description": "Mock REST API used on a collaboration project for learning oauth2orize and passport",
   "main": "bin/www",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "lint": "npx eslint server bin/www",
     "start": "node bin/www"

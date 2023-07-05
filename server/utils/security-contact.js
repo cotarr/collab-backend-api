@@ -21,6 +21,10 @@ const config = require('../config');
 
 /**
  * Route handler for security.txt
+ * @example
+ * const securityContact = require('../util/security-contact');
+ * // Route for security.txt
+ *  app.get('/.well-known/security.txt', securityContact);
  */
 module.exports = (req, res, next) => {
   if (config.site.securityContact.length > 0) {

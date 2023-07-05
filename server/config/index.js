@@ -4,6 +4,14 @@
 
 require('dotenv').config();
 
+// Check requirement for minimum node version
+const minNodeVersion = 18;
+if (parseInt(process.version.replace('v', '').split('.')[0]) < minNodeVersion) {
+  console.error('Error: this program requires node version ' +
+    minNodeVersion.toString() + ' or greater.');
+  process.exit(1);
+}
+
 // const nodeEnv = process.env.NODE_ENV || 'development';
 
 exports.site = {
