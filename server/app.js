@@ -36,13 +36,6 @@ const config = require('./config');
 const logConfig = require('./utils/log-config');
 const nodeEnv = process.env.NODE_ENV || 'development';
 
-if (nodeEnv === 'production') {
-  if (config.oauth2.clientSecret === 'ssh-secret') {
-    console.error('Error, oauth2 client secret must be changed for production');
-    process.exit(1);
-  }
-}
-
 // body parser for accepting JSON
 app.use(express.json());
 // Submission data from <form> elements can be disabled by removing

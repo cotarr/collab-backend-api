@@ -8,7 +8,7 @@ and this project adheres to
 
 ## v1.0.0-dev 2023-07-02
 
-BREAKING CHANGE (since v0.0.10) require Node 18 or greater. Increment major version from 0 to 1
+BREAKING CHANGE (after v0.0.10) require Node 18 or greater. Increment major version from 0 to 1
 
 - Set minimum version NodeJs to node 18 or greater, added node version check in config/index.js.
 - Added example .env file as "example-.env"

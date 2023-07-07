@@ -12,7 +12,7 @@ if (parseInt(process.version.replace('v', '').split('.')[0]) < minNodeVersion) {
   process.exit(1);
 }
 
-// const nodeEnv = process.env.NODE_ENV || 'development';
+const nodeEnv = process.env.NODE_ENV || 'development';
 
 exports.site = {
   // Vhost example: "auth.example.com". Use '*' to accept any URL or numeric IP
@@ -41,3 +41,10 @@ exports.oauth2 = {
   tokenCacheSeconds: parseInt(process.env.OAUTH2_TOKEN_CACHE_SEC || '60'),
   tokenCacheCleanSeconds: parseInt(process.env.OAUTH2_TOKEN_CACHE_CLEAN_SEC || '300')
 };
+
+if (nodeEnv === 'production') {
+  if (exports.oauth2.clientSecret === 'ssh-secret') {
+    console.error('Error, oauth2 client secret must be changed for production');
+    process.exit(1);
+  }
+}
