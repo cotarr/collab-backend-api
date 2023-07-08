@@ -11,6 +11,7 @@ and this project adheres to
 BREAKING CHANGE (after v0.0.10) require Node 18 or greater. Increment major version from 0 to 1
 
 - Set minimum version NodeJs to node 18 or greater, added node version check in config/index.js.
+- Upgrade @cotarr/collab-backend-token-auth to v2.0.0 which requires Node>=18.
 - Added example .env file as "example-.env"
 - Removed node-fetch dependency, was not used.
 - Remove controllers/manual-data.js, routes/manual-data.js, validations/manual-data.js (not needed, to match collab-frontend).
