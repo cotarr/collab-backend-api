@@ -8,6 +8,8 @@ and this project adheres to
 
 
 - Update GitHub CodeQL yaml file to upgrade security scan to v3.
+- Update express@4.21.0 to address npm audit security warning.
+- Update npm package dependencies express-validator@7.2.0, dotenv@16.4.5
 
 ## [v1.0.2](https://github.com/cotarr/collab-backend-api/releases/tag/v1.0.2) - 2024-04-03
 
