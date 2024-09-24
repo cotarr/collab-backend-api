@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+- Update GitHub CodeQL yaml file to upgrade security scan to v3.
+
 ## [v1.0.2](https://github.com/cotarr/collab-backend-api/releases/tag/v1.0.2) - 2024-04-03
 
 - Update express to v4.19.2 to address npm audit security warning
