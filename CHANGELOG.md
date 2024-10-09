@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Next
+
+-
 - Update express@4.21.1 to address npm audit security warning.
 - Remove postman collection, scratchpad no longer available
 - Update GitHub CodeQL yaml file to upgrade security scan to v3.
