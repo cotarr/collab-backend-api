@@ -1,6 +1,6 @@
 {
   "name": "collab-backend-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Mock REST API used on a collaboration project for learning oauth2orize and passport",
   "main": "bin/www",
   "engines": {
