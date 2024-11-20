@@ -8,6 +8,10 @@ and this project adheres to
 
 ## Next
 
+## Dependencies
+
+- Upgrade dependencies compression#1.7.5, @cotarr/collab-backend-token-auth@2.0.2
+
 ## Changes
 
 - Removed npm package eslint.
