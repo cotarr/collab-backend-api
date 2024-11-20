@@ -8,6 +8,18 @@ and this project adheres to
 
 ## Next
 
+## Changes
+
+- Removed npm package eslint.
+- Deleted the eslint.config.mjs configuration file for eslint.
+- Remove lint command from package.json
+- Delete and regenerate package-lock.json
+
+The intent behind removing eslint is to eliminate future GitHub notifications for outdated development dependencies.
+
+There were no code changes in this commit.
+
+## Changes
 -
 - Update express@4.21.1 to address npm audit security warning.
 - Remove postman collection, scratchpad no longer available
